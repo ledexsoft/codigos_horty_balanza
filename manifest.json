@@ -1,0 +1,10 @@
+{
+  "name": "Inventário de Alimentos",
+  "short_name": "Inventário",
+  "description": "Códigos de produtos frescos e mix para balança.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F5F5F7",
+  "theme_color": "#F5F5F7",
+  "icons": []
+}
