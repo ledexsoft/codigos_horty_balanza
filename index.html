@@ -405,7 +405,304 @@
 </div>
 
 <script>
-// DATABASE abridged during API retry would be unsafe
+// ═══════════════════════════ DATABASE ═══════════════════════════
+const DB = [
+  {"id":1,"Name_pt":"Abacate","Cod_Fresco":34,"Cod_Mix":409,"Incicial_Nombre":"A","Categoria_Alimentos":"Frutas"},
+  {"id":2,"Name_pt":"Abacaxi havai","Cod_Fresco":7,"Cod_Mix":417,"Incicial_Nombre":"A","Categoria_Alimentos":"Frutas"},
+  {"id":3,"Name_pt":"Abacaxi perola","Cod_Fresco":9955,"Cod_Mix":418,"Incicial_Nombre":"A","Categoria_Alimentos":"Frutas"},
+  {"id":6,"Name_pt":"Abóbora cabotiá","Cod_Fresco":9796,"Cod_Mix":375,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":5,"Name_pt":"Abóbora menina","Cod_Fresco":9819,"Cod_Mix":378,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":7,"Name_pt":"Abóbora moranga","Cod_Fresco":2563,"Cod_Mix":379,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":8,"Name_pt":"Abóbora pescoço","Cod_Fresco":2565,"Cod_Mix":380,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":9,"Name_pt":"Abobrinha italiana","Cod_Fresco":32,"Cod_Mix":362,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":4,"Name_pt":"Acelga","Cod_Fresco":29,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":22,"Name_pt":"Agrião comum","Cod_Fresco":42,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":21,"Name_pt":"Agrião hidroponico","Cod_Fresco":6008,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":12,"Name_pt":"Alface americana","Cod_Fresco":52,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":16,"Name_pt":"Alface coração","Cod_Fresco":1989,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":13,"Name_pt":"Alface crespa","Cod_Fresco":30,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":17,"Name_pt":"Alface crespa hidropônica","Cod_Fresco":4564,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":15,"Name_pt":"Alface frisée","Cod_Fresco":3342,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":18,"Name_pt":"Alface lisa","Cod_Fresco":44,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":14,"Name_pt":"Alface roxa","Cod_Fresco":9897,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":19,"Name_pt":"Alho","Cod_Fresco":1224,"Cod_Mix":352,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":20,"Name_pt":"Alho-poró","Cod_Fresco":3310,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":23,"Name_pt":"Almeirão","Cod_Fresco":3031,"Cod_Mix":null,"Incicial_Nombre":"A","Categoria_Alimentos":"Hortalizas"},
+  {"id":10,"Name_pt":"Ameixa","Cod_Fresco":13,"Cod_Mix":414,"Incicial_Nombre":"A","Categoria_Alimentos":"Frutas"},
+  {"id":11,"Name_pt":"Atemoia","Cod_Fresco":9794,"Cod_Mix":429,"Incicial_Nombre":"A","Categoria_Alimentos":"Frutas"},
+  {"id":24,"Name_pt":"Banana caturra","Cod_Fresco":35,"Cod_Mix":522,"Incicial_Nombre":"B","Categoria_Alimentos":"Frutas"},
+  {"id":28,"Name_pt":"Banana da terra","Cod_Fresco":853,"Cod_Mix":395,"Incicial_Nombre":"B","Categoria_Alimentos":"Frutas"},
+  {"id":26,"Name_pt":"Banana maçã","Cod_Fresco":69,"Cod_Mix":396,"Incicial_Nombre":"B","Categoria_Alimentos":"Frutas"},
+  {"id":27,"Name_pt":"Banana madura","Cod_Fresco":1652,"Cod_Mix":null,"Incicial_Nombre":"B","Categoria_Alimentos":"Frutas"},
+  {"id":25,"Name_pt":"Banana prata","Cod_Fresco":51,"Cod_Mix":null,"Incicial_Nombre":"B","Categoria_Alimentos":"Frutas"},
+  {"id":33,"Name_pt":"Batata 3kg","Cod_Fresco":492,"Cod_Mix":null,"Incicial_Nombre":"B","Categoria_Alimentos":"Tubérculos"},
+  {"id":32,"Name_pt":"Batata 5kg","Cod_Fresco":59,"Cod_Mix":null,"Incicial_Nombre":"B","Categoria_Alimentos":"Tubérculos"},
+  {"id":30,"Name_pt":"Batata asterix","Cod_Fresco":96162,"Cod_Mix":383,"Incicial_Nombre":"B","Categoria_Alimentos":"Tubérculos"},
+  {"id":29,"Name_pt":"Batata bolinha","Cod_Fresco":2018,"Cod_Mix":746,"Incicial_Nombre":"B","Categoria_Alimentos":"Tubérculos"},
+  {"id":35,"Name_pt":"Batata-doce","Cod_Fresco":28,"Cod_Mix":509,"Incicial_Nombre":"B","Categoria_Alimentos":"Tubérculos"},
+  {"id":36,"Name_pt":"Batata-doce roxa","Cod_Fresco":6443,"Cod_Mix":382,"Incicial_Nombre":"B","Categoria_Alimentos":"Tubérculos"},
+  {"id":31,"Name_pt":"Batata monalisa","Cod_Fresco":20,"Cod_Mix":360,"Incicial_Nombre":"B","Categoria_Alimentos":"Tubérculos"},
+  {"id":34,"Name_pt":"Batata salsa","Cod_Fresco":31,"Cod_Mix":372,"Incicial_Nombre":"B","Categoria_Alimentos":"Tubérculos"},
+  {"id":41,"Name_pt":"Berinjela","Cod_Fresco":66,"Cod_Mix":361,"Incicial_Nombre":"B","Categoria_Alimentos":"Hortalizas"},
+  {"id":37,"Name_pt":"Beterraba","Cod_Fresco":2727,"Cod_Mix":983,"Incicial_Nombre":"B","Categoria_Alimentos":"Hortalizas"},
+  {"id":38,"Name_pt":"Beterraba mç","Cod_Fresco":27,"Cod_Mix":491,"Incicial_Nombre":"B","Categoria_Alimentos":"Hortalizas"},
+  {"id":39,"Name_pt":"Brócolis","Cod_Fresco":50,"Cod_Mix":373,"Incicial_Nombre":"B","Categoria_Alimentos":"Hortalizas"},
+  {"id":40,"Name_pt":"Broto de alfafa","Cod_Fresco":4036,"Cod_Mix":null,"Incicial_Nombre":"B","Categoria_Alimentos":"Hortalizas"},
+  {"id":43,"Name_pt":"Caqui","Cod_Fresco":2595,"Cod_Mix":415,"Incicial_Nombre":"C","Categoria_Alimentos":"Frutas"},
+  {"id":44,"Name_pt":"Carambola","Cod_Fresco":2448,"Cod_Mix":391,"Incicial_Nombre":"C","Categoria_Alimentos":"Frutas"},
+  {"id":45,"Name_pt":"Cebola branca","Cod_Fresco":19,"Cod_Mix":366,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":47,"Name_pt":"Cebola conserva","Cod_Fresco":1827,"Cod_Mix":368,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":46,"Name_pt":"Cebola roxa","Cod_Fresco":48,"Cod_Mix":367,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":48,"Name_pt":"Cenoura comum","Cod_Fresco":25,"Cod_Mix":363,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":42,"Name_pt":"Cereja","Cod_Fresco":886,"Cod_Mix":null,"Incicial_Nombre":"C","Categoria_Alimentos":"Frutas"},
+  {"id":55,"Name_pt":"Cheiro verde","Cod_Fresco":26,"Cod_Mix":null,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":49,"Name_pt":"Chuchu","Cod_Fresco":36,"Cod_Mix":381,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":53,"Name_pt":"Coco","Cod_Fresco":11,"Cod_Mix":553,"Incicial_Nombre":"C","Categoria_Alimentos":"Frutas"},
+  {"id":54,"Name_pt":"Coco verde","Cod_Fresco":20181,"Cod_Mix":657,"Incicial_Nombre":"C","Categoria_Alimentos":"Frutas"},
+  {"id":52,"Name_pt":"Coentro","Cod_Fresco":230,"Cod_Mix":null,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":57,"Name_pt":"Cogumelo champignon","Cod_Fresco":5313,"Cod_Mix":493,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":58,"Name_pt":"Cogumelo shimeji","Cod_Fresco":564,"Cod_Mix":null,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":59,"Name_pt":"Cogumelo shitake","Cod_Fresco":788,"Cod_Mix":null,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":50,"Name_pt":"Couve-flor","Cod_Fresco":24,"Cod_Mix":374,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":56,"Name_pt":"Couve-flor orgânica","Cod_Fresco":3017,"Cod_Mix":null,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":51,"Name_pt":"Couve manteiga","Cod_Fresco":54,"Cod_Mix":747,"Incicial_Nombre":"C","Categoria_Alimentos":"Hortalizas"},
+  {"id":60,"Name_pt":"Ervilha","Cod_Fresco":4951,"Cod_Mix":433,"Incicial_Nombre":"E","Categoria_Alimentos":"Hortalizas"},
+  {"id":61,"Name_pt":"Escarola","Cod_Fresco":65,"Cod_Mix":null,"Incicial_Nombre":"E","Categoria_Alimentos":"Hortalizas"},
+  {"id":62,"Name_pt":"Espinafre","Cod_Fresco":2985,"Cod_Mix":null,"Incicial_Nombre":"E","Categoria_Alimentos":"Hortalizas"},
+  {"id":67,"Name_pt":"Figo roxo","Cod_Fresco":6363,"Cod_Mix":null,"Incicial_Nombre":"F","Categoria_Alimentos":"Frutas"},
+  {"id":65,"Name_pt":"Gengibre","Cod_Fresco":1888,"Cod_Mix":351,"Incicial_Nombre":"G","Categoria_Alimentos":"Hortalizas"},
+  {"id":63,"Name_pt":"Goiaba","Cod_Fresco":14,"Cod_Mix":419,"Incicial_Nombre":"G","Categoria_Alimentos":"Frutas"},
+  {"id":64,"Name_pt":"Hortelã","Cod_Fresco":6405,"Cod_Mix":null,"Incicial_Nombre":"H","Categoria_Alimentos":"Hortalizas"},
+  {"id":66,"Name_pt":"Inhame","Cod_Fresco":9797,"Cod_Mix":371,"Incicial_Nombre":"I","Categoria_Alimentos":"Tubérculos"},
+  {"id":69,"Name_pt":"Jabuticaba","Cod_Fresco":537,"Cod_Mix":1280,"Incicial_Nombre":"J","Categoria_Alimentos":"Frutas"},
+  {"id":68,"Name_pt":"Jiló","Cod_Fresco":1657,"Cod_Mix":489,"Incicial_Nombre":"J","Categoria_Alimentos":"Hortalizas"},
+  {"id":70,"Name_pt":"Kiwi","Cod_Fresco":45,"Cod_Mix":403,"Incicial_Nombre":"K","Categoria_Alimentos":"Frutas"},
+  {"id":71,"Name_pt":"Laranja Bahia","Cod_Fresco":2644,"Cod_Mix":404,"Incicial_Nombre":"L","Categoria_Alimentos":"Frutas"},
+  {"id":72,"Name_pt":"Laranja Lima","Cod_Fresco":9,"Cod_Mix":405,"Incicial_Nombre":"L","Categoria_Alimentos":"Frutas"},
+  {"id":73,"Name_pt":"Laranja Pera","Cod_Fresco":1999,"Cod_Mix":406,"Incicial_Nombre":"L","Categoria_Alimentos":"Frutas"},
+  {"id":74,"Name_pt":"Limão","Cod_Fresco":10,"Cod_Mix":411,"Incicial_Nombre":"L","Categoria_Alimentos":"Frutas"},
+  {"id":75,"Name_pt":"Limão siciliano","Cod_Fresco":398,"Cod_Mix":961,"Incicial_Nombre":"L","Categoria_Alimentos":"Frutas"},
+  {"id":76,"Name_pt":"Maçã argentina","Cod_Fresco":2,"Cod_Mix":398,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":77,"Name_pt":"Maçã Fuji","Cod_Fresco":289,"Cod_Mix":397,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":78,"Name_pt":"Maçã Gala","Cod_Fresco":3,"Cod_Mix":399,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":79,"Name_pt":"Maçã Pink Lady","Cod_Fresco":4409,"Cod_Mix":400,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":80,"Name_pt":"Maçã verde","Cod_Fresco":616,"Cod_Mix":401,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":81,"Name_pt":"Mamão Formosa","Cod_Fresco":5,"Cod_Mix":384,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":82,"Name_pt":"Mamão Papaia","Cod_Fresco":6,"Cod_Mix":385,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":84,"Name_pt":"Mandioca","Cod_Fresco":33,"Cod_Mix":370,"Incicial_Nombre":"M","Categoria_Alimentos":"Tubérculos"},
+  {"id":83,"Name_pt":"Mandioca embalada","Cod_Fresco":40,"Cod_Mix":520,"Incicial_Nombre":"M","Categoria_Alimentos":"Tubérculos"},
+  {"id":85,"Name_pt":"Manga espada","Cod_Fresco":1544,"Cod_Mix":387,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":86,"Name_pt":"Manga Palmer","Cod_Fresco":1562,"Cod_Mix":388,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":87,"Name_pt":"Manga Tommy","Cod_Fresco":4,"Cod_Mix":389,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":88,"Name_pt":"Manjericão","Cod_Fresco":6367,"Cod_Mix":null,"Incicial_Nombre":"M","Categoria_Alimentos":"Hortalizas"},
+  {"id":89,"Name_pt":"Maracujá","Cod_Fresco":12,"Cod_Mix":386,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":91,"Name_pt":"Melancia","Cod_Fresco":15,"Cod_Mix":null,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":90,"Name_pt":"Melancia baby","Cod_Fresco":1758,"Cod_Mix":null,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":92,"Name_pt":"Melão","Cod_Fresco":53,"Cod_Mix":393,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":93,"Name_pt":"Mexerica","Cod_Fresco":1829,"Cod_Mix":766,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":94,"Name_pt":"Milho verde bdj","Cod_Fresco":989898,"Cod_Mix":477,"Incicial_Nombre":"M","Categoria_Alimentos":"Hortalizas"},
+  {"id":95,"Name_pt":"Milho verde uni","Cod_Fresco":97884,"Cod_Mix":null,"Incicial_Nombre":"M","Categoria_Alimentos":"Hortalizas"},
+  {"id":96,"Name_pt":"Morango bandeja","Cod_Fresco":710,"Cod_Mix":407,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":97,"Name_pt":"Morango kg","Cod_Fresco":1515,"Cod_Mix":null,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":98,"Name_pt":"Morgote","Cod_Fresco":3207,"Cod_Mix":413,"Incicial_Nombre":"M","Categoria_Alimentos":"Frutas"},
+  {"id":99,"Name_pt":"Nabo","Cod_Fresco":1900,"Cod_Mix":null,"Incicial_Nombre":"N","Categoria_Alimentos":"Hortalizas"},
+  {"id":100,"Name_pt":"Nectarina","Cod_Fresco":97856,"Cod_Mix":518,"Incicial_Nombre":"N","Categoria_Alimentos":"Frutas"},
+  {"id":101,"Name_pt":"Ovos branco c/12","Cod_Fresco":47,"Cod_Mix":null,"Incicial_Nombre":"O","Categoria_Alimentos":"Proteínas"},
+  {"id":102,"Name_pt":"Ovos branco c/30","Cod_Fresco":204,"Cod_Mix":null,"Incicial_Nombre":"O","Categoria_Alimentos":"Proteínas"},
+  {"id":103,"Name_pt":"Ovos caipira","Cod_Fresco":1832,"Cod_Mix":null,"Incicial_Nombre":"O","Categoria_Alimentos":"Proteínas"},
+  {"id":104,"Name_pt":"Ovos codorna","Cod_Fresco":1625,"Cod_Mix":null,"Incicial_Nombre":"O","Categoria_Alimentos":"Proteínas"},
+  {"id":105,"Name_pt":"Ovos vermelho c/30","Cod_Fresco":1632,"Cod_Mix":null,"Incicial_Nombre":"O","Categoria_Alimentos":"Proteínas"},
+  {"id":106,"Name_pt":"Ovos vermelhos c/12","Cod_Fresco":16,"Cod_Mix":null,"Incicial_Nombre":"O","Categoria_Alimentos":"Proteínas"},
+  {"id":107,"Name_pt":"Pepino conserva","Cod_Fresco":9953,"Cod_Mix":null,"Incicial_Nombre":"P","Categoria_Alimentos":"Hortalizas"},
+  {"id":108,"Name_pt":"Pepino japonês","Cod_Fresco":2415,"Cod_Mix":365,"Incicial_Nombre":"P","Categoria_Alimentos":"Hortalizas"},
+  {"id":109,"Name_pt":"Pepino salada","Cod_Fresco":21,"Cod_Mix":364,"Incicial_Nombre":"P","Categoria_Alimentos":"Hortalizas"},
+  {"id":110,"Name_pt":"Pera Williams","Cod_Fresco":43,"Cod_Mix":431,"Incicial_Nombre":"P","Categoria_Alimentos":"Frutas"},
+  {"id":111,"Name_pt":"Pêssego amarelo","Cod_Fresco":901,"Cod_Mix":634,"Incicial_Nombre":"P","Categoria_Alimentos":"Frutas"},
+  {"id":112,"Name_pt":"Pêssego branco","Cod_Fresco":900,"Cod_Mix":488,"Incicial_Nombre":"P","Categoria_Alimentos":"Frutas"},
+  {"id":113,"Name_pt":"Pimenta cambuci bdj","Cod_Fresco":1830,"Cod_Mix":null,"Incicial_Nombre":"P","Categoria_Alimentos":"Hortalizas"},
+  {"id":114,"Name_pt":"Pimenta cambuci kg","Cod_Fresco":9848,"Cod_Mix":639,"Incicial_Nombre":"P","Categoria_Alimentos":"Hortalizas"},
+  {"id":115,"Name_pt":"Pimenta dedo de moça bdj","Cod_Fresco":89,"Cod_Mix":434,"Incicial_Nombre":"P","Categoria_Alimentos":"Hortalizas"},
+  {"id":116,"Name_pt":"Pimentão amarelo","Cod_Fresco":301,"Cod_Mix":357,"Incicial_Nombre":"P","Categoria_Alimentos":"Hortalizas"},
+  {"id":117,"Name_pt":"Pimentão verde","Cod_Fresco":22,"Cod_Mix":359,"Incicial_Nombre":"P","Categoria_Alimentos":"Hortalizas"},
+  {"id":118,"Name_pt":"Pimentão vermelho","Cod_Fresco":300,"Cod_Mix":358,"Incicial_Nombre":"P","Categoria_Alimentos":"Hortalizas"},
+  {"id":119,"Name_pt":"Pinhão","Cod_Fresco":9795,"Cod_Mix":718,"Incicial_Nombre":"P","Categoria_Alimentos":"Frutas"},
+  {"id":120,"Name_pt":"Pitaya","Cod_Fresco":78,"Cod_Mix":428,"Incicial_Nombre":"P","Categoria_Alimentos":"Frutas"},
+  {"id":121,"Name_pt":"Quiabo","Cod_Fresco":1831,"Cod_Mix":992,"Incicial_Nombre":"Q","Categoria_Alimentos":"Hortalizas"},
+  {"id":122,"Name_pt":"Rabanete","Cod_Fresco":67,"Cod_Mix":432,"Incicial_Nombre":"R","Categoria_Alimentos":"Hortalizas"},
+  {"id":123,"Name_pt":"Radicchio roxo","Cod_Fresco":6368,"Cod_Mix":null,"Incicial_Nombre":"R","Categoria_Alimentos":"Hortalizas"},
+  {"id":124,"Name_pt":"Radite","Cod_Fresco":2754,"Cod_Mix":null,"Incicial_Nombre":"R","Categoria_Alimentos":"Hortalizas"},
+  {"id":125,"Name_pt":"Repolho roxo","Cod_Fresco":2416,"Cod_Mix":503,"Incicial_Nombre":"R","Categoria_Alimentos":"Hortalizas"},
+  {"id":126,"Name_pt":"Repolho verde","Cod_Fresco":23,"Cod_Mix":504,"Incicial_Nombre":"R","Categoria_Alimentos":"Hortalizas"},
+  {"id":129,"Name_pt":"Rúcula","Cod_Fresco":56,"Cod_Mix":null,"Incicial_Nombre":"R","Categoria_Alimentos":"Hortalizas"},
+  {"id":128,"Name_pt":"Rúcula hidropônica","Cod_Fresco":5865,"Cod_Mix":null,"Incicial_Nombre":"R","Categoria_Alimentos":"Hortalizas"},
+  {"id":130,"Name_pt":"Salsão","Cod_Fresco":73,"Cod_Mix":null,"Incicial_Nombre":"S","Categoria_Alimentos":"Hortalizas"},
+  {"id":131,"Name_pt":"Salsinha","Cod_Fresco":68,"Cod_Mix":null,"Incicial_Nombre":"S","Categoria_Alimentos":"Hortalizas"},
+  {"id":132,"Name_pt":"Tangerina / Ponkan","Cod_Fresco":41,"Cod_Mix":412,"Incicial_Nombre":"T","Categoria_Alimentos":"Frutas"},
+  {"id":133,"Name_pt":"Tomate cereja","Cod_Fresco":74,"Cod_Mix":632,"Incicial_Nombre":"T","Categoria_Alimentos":"Hortalizas"},
+  {"id":134,"Name_pt":"Tomate longa vida","Cod_Fresco":18,"Cod_Mix":355,"Incicial_Nombre":"T","Categoria_Alimentos":"Hortalizas"},
+  {"id":127,"Name_pt":"Tomate roma","Cod_Fresco":603,"Cod_Mix":1295,"Incicial_Nombre":"T","Categoria_Alimentos":"Hortalizas"},
+  {"id":135,"Name_pt":"Tomate salatede","Cod_Fresco":7219,"Cod_Mix":356,"Incicial_Nombre":"T","Categoria_Alimentos":"Hortalizas"},
+  {"id":136,"Name_pt":"Uva Benitaka","Cod_Fresco":2238,"Cod_Mix":421,"Incicial_Nombre":"U","Categoria_Alimentos":"Frutas"},
+  {"id":137,"Name_pt":"Uva Crimson","Cod_Fresco":525,"Cod_Mix":916,"Incicial_Nombre":"U","Categoria_Alimentos":"Frutas"},
+  {"id":138,"Name_pt":"Uva Itália","Cod_Fresco":75,"Cod_Mix":422,"Incicial_Nombre":"U","Categoria_Alimentos":"Frutas"},
+  {"id":139,"Name_pt":"Uva Nubia","Cod_Fresco":4248,"Cod_Mix":424,"Incicial_Nombre":"U","Categoria_Alimentos":"Frutas"},
+  {"id":140,"Name_pt":"Uva rosada","Cod_Fresco":784,"Cod_Mix":423,"Incicial_Nombre":"U","Categoria_Alimentos":"Frutas"},
+  {"id":143,"Name_pt":"Uva Rubi","Cod_Fresco":529,"Cod_Mix":426,"Incicial_Nombre":"U","Categoria_Alimentos":"Frutas"},
+  {"id":141,"Name_pt":"Uva Thompson","Cod_Fresco":1526,"Cod_Mix":494,"Incicial_Nombre":"U","Categoria_Alimentos":"Frutas"},
+  {"id":142,"Name_pt":"Uva Vitória","Cod_Fresco":527,"Cod_Mix":495,"Incicial_Nombre":"U","Categoria_Alimentos":"Frutas"},
+  {"id":144,"Name_pt":"Vagem bdj","Cod_Fresco":201,"Cod_Mix":490,"Incicial_Nombre":"V","Categoria_Alimentos":"Hortalizas"},
+  {"id":145,"Name_pt":"Vagem kg","Cod_Fresco":37,"Cod_Mix":858,"Incicial_Nombre":"V","Categoria_Alimentos":"Hortalizas"}
+];
+
+// ═══════════════════════════ SPLASH ═══════════════════════════
+const bar = document.getElementById('splash-bar');
+const splash = document.getElementById('splash');
+const app = document.getElementById('app');
+
+const steps = [12, 30, 50, 68, 84, 100];
+let si = 0;
+function tick() {
+  if (si >= steps.length) return;
+  bar.style.width = steps[si++] + '%';
+  if (si < steps.length) setTimeout(tick, 100 + Math.random() * 140);
+  else setTimeout(() => {
+    splash.classList.add('hidden');
+    app.classList.add('visible');
+  }, 380);
+}
+setTimeout(tick, 250);
+
+// ═══════════════════════════ STATE ═══════════════════════════
+const IPP = 10;
+let S = { q: '', cat: 'Todas', sk: 'Name_pt', sd: 'asc', pg: 1, all: false };
+
+const badgeCls = c => ({ Frutas:'bf', Hortalizas:'bh', 'Tubérculos':'bt', 'Proteínas':'bp' }[c] || 'bd');
+const cats = () => ['Todas', ...[...new Set(DB.map(d => d.Categoria_Alimentos))].sort()];
+
+function proc() {
+  let d = DB.filter(r => {
+    const q = S.q.toLowerCase();
+    return (r.Name_pt.toLowerCase().includes(q) ||
+            String(r.Cod_Fresco).includes(q) ||
+            (r.Cod_Mix !== null && String(r.Cod_Mix).includes(q)))
+        && (S.cat === 'Todas' || r.Categoria_Alimentos === S.cat);
+  });
+  d.sort((a,b) => {
+    let av = a[S.sk], bv = b[S.sk];
+    if (av===null && bv===null) return 0;
+    if (av===null) return 1; if (bv===null) return -1;
+    if (typeof av==='string') { av=av.toLowerCase(); bv=bv.toLowerCase(); }
+    return av<bv ? (S.sd==='asc'?-1:1) : av>bv ? (S.sd==='asc'?1:-1) : 0;
+  });
+  return d;
+}
+
+function render() {
+  const data = proc();
+  const tp = Math.max(1, Math.ceil(data.length / IPP));
+  if (S.pg > tp) S.pg = tp;
+  const rows = S.all ? data : data.slice((S.pg-1)*IPP, S.pg*IPP);
+
+  document.getElementById('cnt').textContent = data.length;
+
+  const tb = document.getElementById('tbody');
+  if (!rows.length) {
+    tb.innerHTML = '<tr class="empty"><td colspan="4">Nenhum resultado encontrado.</td></tr>';
+  } else {
+    tb.innerHTML = rows.map((r,i) => `
+      <tr style="animation-delay:${Math.min(i,25)*20}ms">
+        <td><div class="cell-name">
+          <div class="avatar">${r.Incicial_Nombre}</div>
+          <span class="pname">${r.Name_pt}</span>
+        </div></td>
+        <td><span class="badge ${badgeCls(r.Categoria_Alimentos)}">${r.Categoria_Alimentos}</span></td>
+        <td class="r"><span class="mono mc">${r.Cod_Fresco}</span></td>
+        <td class="r">${r.Cod_Mix!==null ? `<span class="mono ms">${r.Cod_Mix}</span>` : '<span class="mn">--</span>'}</td>
+      </tr>`).join('');
+  }
+
+  // Footer
+  const footer = document.getElementById('pag-footer');
+  if (S.all) {
+    footer.innerHTML = `
+      <div class="all-badge"><span class="dot"></span>Mostrando todos os ${data.length} itens</div>
+      <span></span>`;
+  } else {
+    footer.innerHTML = `
+      <span class="pag-info">Página ${S.pg} de ${tp} &nbsp;·&nbsp; ${data.length} itens</span>
+      <div class="pag-btns">
+        <button class="pb" id="prev-btn" ${S.pg<=1?'disabled':''}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button class="pb" id="next-btn" ${S.pg>=tp?'disabled':''}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>`;
+    document.getElementById('prev-btn').addEventListener('click', () => { S.pg--; render(); });
+    document.getElementById('next-btn').addEventListener('click', () => { S.pg++; render(); });
+  }
+
+  // Sort headers
+  document.querySelectorAll('th[data-k]').forEach(th => {
+    const k = th.dataset.k, isR = k==='Cod_Fresco'||k==='Cod_Mix';
+    th.className = (isR?'r ':'') + (k===S.sk ? 'sorted '+S.sd : '');
+    if (!th.querySelector('.si')) th.innerHTML += '<span class="si">▾</span>';
+  });
+}
+
+function renderSeg() {
+  document.getElementById('seg').innerHTML = cats().map(c =>
+    `<button class="seg-btn${c===S.cat?' active':''}" data-c="${c}">${c}</button>`
+  ).join('');
+}
+
+// Events
+document.getElementById('search-input').addEventListener('input', e => { S.q=e.target.value; S.pg=1; render(); });
+
+document.getElementById('seg').addEventListener('click', e => {
+  const b = e.target.closest('.seg-btn'); if (!b) return;
+  S.cat=b.dataset.c; S.pg=1;
+  document.querySelectorAll('.seg-btn').forEach(x => x.classList.toggle('active', x===b));
+  render();
+});
+
+document.querySelectorAll('th[data-k]').forEach(th => {
+  th.addEventListener('click', () => {
+    const k=th.dataset.k;
+    S.sd = S.sk===k ? (S.sd==='asc'?'desc':'asc') : 'asc';
+    S.sk=k; render();
+  });
+});
+
+document.getElementById('vt-pages').addEventListener('click', () => {
+  S.all=false; S.pg=1;
+  document.getElementById('vt-pages').classList.add('active');
+  document.getElementById('vt-all').classList.remove('active');
+  render();
+});
+document.getElementById('vt-all').addEventListener('click', () => {
+  S.all=true;
+  document.getElementById('vt-all').classList.add('active');
+  document.getElementById('vt-pages').classList.remove('active');
+  render();
+});
+
+// PWA install
+let deferredPrompt;
+const banner = document.getElementById('install-banner');
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt=e; banner.classList.add('visible'); });
+document.getElementById('install-btn').addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt(); await deferredPrompt.userChoice;
+  deferredPrompt=null; banner.classList.remove('visible');
+});
+document.getElementById('install-dismiss').addEventListener('click', () => banner.classList.remove('visible'));
+
+// Init
+renderSeg();
+render();
 </script>
 </body>
 </html>
