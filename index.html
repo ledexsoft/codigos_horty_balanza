@@ -9,9 +9,19 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Inventário" />
   <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
   <title>Inventário</title>
 
-  <link rel="stylesheet" href="styles.css" />
+  <script>
+    try {
+      const state = JSON.parse(localStorage.getItem('inventario_state_v2') || '{}');
+      document.documentElement.dataset.theme = localStorage.getItem('inventario_tema') || state.tema || 'claro';
+    } catch {
+      document.documentElement.dataset.theme = 'claro';
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css?v=6" />
 </head>
 <body>
 
@@ -41,20 +51,25 @@
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
       </svg>
       <input id="search-input" type="text" placeholder="Buscar itens..." autocomplete="off" aria-label="Buscar itens" />
+      <button class="search-clear" id="search-clear" type="button" aria-label="Limpar busca" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
     </div>
 
     <div class="controls-right">
-      <div class="seg" id="seg"></div>
+      <div class="seg" id="seg" role="group" aria-label="Filtrar por categoria"></div>
 
-      <div class="vtog">
-        <button class="vbtn active" id="vt-pages" type="button" aria-label="Ver por páginas">
+      <div class="vtog" role="group" aria-label="Modo de visualização">
+        <button class="vbtn active" id="vt-pages" type="button" aria-label="Ver por páginas" aria-pressed="true">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
             <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
           </svg>
           Páginas
         </button>
-        <button class="vbtn" id="vt-all" type="button" aria-label="Ver todos">
+        <button class="vbtn" id="vt-all" type="button" aria-label="Ver todos" aria-pressed="false">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/>
             <line x1="3" y1="18" x2="21" y2="18"/>
@@ -62,18 +77,30 @@
           Todos
         </button>
       </div>
+
+      <button class="theme-btn" id="theme-toggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false">
+        <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8Z"/>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <span id="theme-label">Escuro</span>
+      </button>
     </div>
   </div>
+
+  <div class="alert" id="app-alert" role="alert" hidden></div>
 
   <div class="card">
     <div class="scroll-x">
       <table>
         <thead>
           <tr>
-            <th data-k="Name_pt" class="sorted asc" scope="col" role="button" tabindex="0" aria-sort="ascending">Produto <span class="si">▾</span></th>
-            <th data-k="Categoria_Alimentos" scope="col" role="button" tabindex="0" aria-sort="none">Categoria <span class="si">▾</span></th>
-            <th data-k="Cod_Fresco" class="r" scope="col" role="button" tabindex="0" aria-sort="none">Cod. Fresco <span class="si">▾</span></th>
-            <th data-k="Cod_Mix" class="r" scope="col" role="button" tabindex="0" aria-sort="none">Cod. Mix <span class="si">▾</span></th>
+            <th data-k="Name_pt" class="col-product sorted asc" scope="col" role="button" tabindex="0" aria-sort="ascending">Produto <span class="si">▾</span></th>
+            <th data-k="Categoria_Alimentos" class="col-category" scope="col" role="button" tabindex="0" aria-sort="none">Categoria <span class="si">▾</span></th>
+            <th data-k="Cod_Fresco" class="col-code r" scope="col" role="button" tabindex="0" aria-sort="none"><span class="label-full">Cód. Fresco</span><span class="label-short">Fresco</span> <span class="si">▾</span></th>
+            <th data-k="Cod_Mix" class="col-code r col-mix" scope="col" role="button" tabindex="0" aria-sort="none"><span class="label-full">Cód. Mix</span><span class="label-short">Mix</span> <span class="si">▾</span></th>
           </tr>
         </thead>
         <tbody id="tbody"></tbody>
@@ -86,11 +113,11 @@
 
 <!-- PWA install banner -->
 <div id="install-banner">
-  <span>Adicionar ao início</span>
+  <span>Adicionar à tela inicial</span>
   <button id="install-btn" type="button">Instalar</button>
   <button id="install-dismiss" type="button" aria-label="Fechar">✕</button>
 </div>
 
-<script src="app.js" defer></script>
+<script src="app.js?v=6" type="module"></script>
 </body>
 </html>
